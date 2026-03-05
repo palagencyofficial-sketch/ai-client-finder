@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Lead | Client Finder</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-slate-950 text-white min-h-screen flex items-center justify-center">
+
+
+<div class="bg-slate-900 p-8 rounded-xl w-full max-w-md border border-slate-700">
+
+<h1 class="text-2xl font-bold mb-6">
+Add New Lead
+</h1>
+
+<form id="leadForm" class="space-y-4">
+
+<input
+id="company"
+type="text"
+placeholder="Company Name"
+class="w-full p-3 bg-slate-800 rounded-lg border border-slate-700"
+/>
+
+<input
+id="need"
+type="text"
+placeholder="Service Needed"
+class="w-full p-3 bg-slate-800 rounded-lg border border-slate-700"
+/>
+
+<input
+id="budget"
+type="text"
+placeholder="Budget ($)"
+class="w-full p-3 bg-slate-800 rounded-lg border border-slate-700"
+/>
+
+<input
+id="contact"
+type="email"
+placeholder="Client Email"
+class="w-full p-3 bg-slate-800 rounded-lg border border-slate-700"
+/>
+
+<button
+class="w-full bg-blue-600 hover:bg-blue-500 p-3 rounded-lg font-semibold"
+>
+Add Lead
+</button>
+
+</form>
+
+</div>
+
+
+<script>
+
+document.getElementById("leadForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+const company=document.getElementById("company").value
+const need=document.getElementById("need").value
+const budget=document.getElementById("budget").value
+const contact=document.getElementById("contact").value
+
+const lead={company,need,budget,contact}
+
+let leads=JSON.parse(localStorage.getItem("leads")) || []
+
+leads.push(lead)
+
+localStorage.setItem("leads",JSON.stringify(leads))
+
+alert("Lead Added Successfully!")
+
+})
+
+</script>
+
+</body>
+
+</html>
