@@ -1,0 +1,23 @@
+[
+  {
+    "company": "SaaS Startup",
+    "need": "Video Ads",
+    "industry": "Technology B2B",
+    "budget": "$2000",
+    "contact": "marketing@startup.com"
+  },
+  {
+    "company": "E-commerce Brand",
+    "need": "Copywriting",
+    "industry": "Retail D2C",
+    "budget": "$1500",
+    "contact": "brand@email.com"
+  },
+  {
+    "company": "AI Agency",
+    "need": "Automation Setup",
+    "industry": "Consulting",
+    "budget": "$3000",
+    "contact": "agency@email.com"
+  }
+]
