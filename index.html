@@ -149,6 +149,52 @@
                         </tr>
                     </tbody>
                 </table>
+                <script>
+
+async function loadLeads(){
+
+const response = await fetch("leads.json")
+const leads = await response.json()
+
+const tableBody = document.querySelector("tbody")
+
+tableBody.innerHTML=""
+
+leads.forEach(lead => {
+
+const row = `
+<tr class="hover:bg-slate-800/30 transition-colors">
+
+<td class="py-4 px-6 font-semibold text-slate-200">
+${lead.company}
+</td>
+
+<td class="py-4 px-6 text-purple-400">
+${lead.need}
+</td>
+
+<td class="py-4 px-6 text-emerald-400 font-bold">
+${lead.budget}
+</td>
+
+<td class="py-4 px-6 text-right">
+<a href="mailto:${lead.contact}" class="bg-blue-600 px-3 py-1 rounded-lg text-white text-sm">
+Email
+</a>
+</td>
+
+</tr>
+`
+
+tableBody.innerHTML += row
+
+})
+
+}
+
+loadLeads()
+
+                </script>
             </div>
             
             <!-- Table Footer -->
