@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Outreach Generator</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-slate-950 text-white min-h-screen flex items-center justify-center">
+
+<div class="bg-slate-900 p-8 rounded-xl border border-slate-700 w-full max-w-xl">
+
+<h1 class="text-2xl font-bold mb-6">
+AI Outreach Generator
+</h1>
+
+<input
+id="company"
+placeholder="Company Name"
+class="w-full p-3 mb-3 bg-slate-800 border border-slate-700 rounded-lg"
+/>
+
+<input
+id="service"
+placeholder="Your Service (ex: Video Ads)"
+class="w-full p-3 mb-3 bg-slate-800 border border-slate-700 rounded-lg"
+/>
+
+<button
+onclick="generateEmail()"
+class="w-full bg-blue-600 hover:bg-blue-500 p-3 rounded-lg font-semibold mb-4"
+>
+Generate Outreach
+</button>
+
+<textarea
+id="result"
+rows="8"
+class="w-full bg-slate-800 border border-slate-700 p-3 rounded-lg"
+></textarea>
+
+</div>
+
+
+<script>
+
+function generateEmail(){
+
+const company=document.getElementById("company").value
+const service=document.getElementById("service").value
+
+const message=
+
+`Hi ${company} Team,
+
+I noticed your brand and thought it has great potential.
+
+I help companies like yours with high converting ${service} that increase engagement and sales.
+
+Would love to share a quick idea that could work for your brand.
+
+Best,
+Khokon
+Pal Editing Agency`
+
+document.getElementById("result").value=message
+
+}
+
+</script>
+
+</body>
+</html>
