@@ -1,244 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Client Finder | Dashboard</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#3b82f6', // Blue 500
-                        secondary: '#8b5cf6', // Violet 500
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body {
-            background-color: #020617; /* Slate 950 */
-            color: #f8fafc;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Client Finder | Dashboard</title>
 
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+<script src="https://cdn.tailwindcss.com"></script>
 
-        /* Custom Scrollbar for table */
-        ::-webkit-scrollbar { height: 8px; width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    </style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+theme:{
+extend:{
+fontFamily:{ sans:['Inter','sans-serif'] },
+colors:{
+primary:'#3b82f6',
+secondary:'#8b5cf6'
+}
+}
+}
+}
+</script>
+
+<style>
+
+body{
+background-color:#020617;
+color:#f8fafc;
+background-image:
+radial-gradient(circle at 10% 20%, rgba(59,130,246,0.05) 0%, transparent 40%),
+radial-gradient(circle at 90% 80%, rgba(139,92,246,0.05) 0%, transparent 40%);
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+.glass-panel{
+background:rgba(15,23,42,0.6);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.05);
+}
+
+</style>
 </head>
+
 <body class="antialiased font-sans">
 
-    <!-- Top Navigation Bar -->
-    <nav class="w-full border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo & Brand -->
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <span class="font-bold text-lg tracking-wide text-white">Client Finder<span class="text-blue-500">.ai</span></span>
-                </div>
-                
-                <!-- Right Side Profile -->
-                <div class="flex items-center gap-4">
-                    <button class="relative p-2 text-slate-400 hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full"></span>
-                    </button>
-                    <div class="w-8 h-8 rounded-full bg-slate-700 border border-slate-600 overflow-hidden">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Khokan" alt="User Avatar" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+<nav class="w-full border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
 
-    <!-- Main Content -->
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
-        
-        <!-- Dashboard Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-            <div>
-                <h1 class="text-2xl sm:text-3xl font-bold text-white mb-1">Lead Dashboard</h1>
-                <p class="text-sm text-slate-400">Discover and manage high-ticket AI clients.</p>
-            </div>
-            
-            <!-- Actions: Search & Filter -->
-            <div class="flex items-center gap-3">
-                <div class="relative">
-                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <input type="text" placeholder="Search clients..." class="w-full md:w-64 pl-10 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
-                </div>
-                <button class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-sm font-medium transition-colors">
-                    <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
-                    Filter
-                </button>
-            </div>
-        </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <!-- Data Table Container -->
-        <div class="glass-panel rounded-2xl overflow-hidden shadow-2xl">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    
-                    <!-- Table Header -->
-                    <thead>
-                        <tr class="bg-slate-800/50 border-b border-slate-700/80">
-                            <th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">Company</th>
-                            <th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">Requirement Need</th>
-                            <th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">Estimated Budget</th>
-                            <th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider text-right">Contact Action</th>
-                        </tr>
-                    </thead>
-                    
-                    <!-- Table Body -->
-                    <tbody class="divide-y divide-slate-800/60">
-                        
-                        <!-- Row 1: Your Original Data -->
-                        <tr class="hover:bg-slate-800/30 transition-colors group">
-                            <td class="py-4 px-6">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-slate-200">SaaS Startup</div>
-                                        <div class="text-xs text-slate-500">Technology • B2B</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-medium">
-                                    <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-                                    Video Ads
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-mono font-bold text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-md inline-block border border-emerald-400/20">
-                                    $2,000
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <a href="mailto:marketing@startup.com" class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-all shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40">
-                                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                    Email Client
-                                </a>
-                            </td>
-                        </tr>
+<div class="flex items-center justify-between h-16">
 
-                        <!-- Row 2: Demo Data to make it look like a full SaaS -->
-                        <tr class="hover:bg-slate-800/30 transition-colors group">
-                            <td class="py-4 px-6">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400">
-                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-slate-200">E-commerce Brand</div>
-                                        <div class="text-xs text-slate-500">Retail • D2C</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-medium">
-                                    <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                                    Copywriting
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-mono font-bold text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-md inline-block border border-emerald-400/20">
-                                    $1,500
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <a href="#" class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-all border border-slate-700">
-                                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                    Email Client
-                                </a>
-                            </td>
-                        </tr>
+<div class="flex items-center gap-3">
 
-                        <!-- Row 3: Demo Data -->
-                        <tr class="hover:bg-slate-800/30 transition-colors group">
-                            <td class="py-4 px-6">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400">
-                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><circle cx="12" cy="12" r="4"></circle></svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-slate-200">AI Agency</div>
-                                        <div class="text-xs text-slate-500">Service • Consulting</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-medium">
-                                    <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                    Automation Setup
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-mono font-bold text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-md inline-block border border-emerald-400/20">
-                                    $4,500
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <a href="#" class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-all border border-slate-700">
-                                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                    Email Client
-                                </a>
-                            </td>
-                        </tr>
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-bold">
 
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Table Pagination / Footer Area -->
-            <div class="px-6 py-4 border-t border-slate-800/60 bg-slate-900/30 flex items-center justify-between">
-                <p class="text-sm text-slate-500">Showing <span class="font-medium text-slate-300">1</span> to <span class="font-medium text-slate-300">3</span> of <span class="font-medium text-slate-300">42</span> leads</p>
-                <div class="flex gap-2">
-                    <button class="px-3 py-1 rounded-md border border-slate-700 text-slate-400 hover:bg-slate-800 disabled:opacity-50 text-sm" disabled>Previous</button>
-                    <button class="px-3 py-1 rounded-md border border-slate-700 text-slate-300 hover:bg-slate-800 text-sm">Next</button>
-                </div>
-            </div>
-        </div>
-    </main>
+🔎
 
-    <!-- Developer Footer -->
-    <footer class="w-full text-center py-6 mt-auto border-t border-slate-800/50 bg-slate-900/20 backdrop-blur-sm">
-        <p class="text-sm text-slate-400">
-            Designed & Developed by <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400 tracking-wide">Khokan Pal</span>
-        </p>
-    </footer>
+</div>
+
+<span class="font-bold text-lg tracking-wide text-white">
+
+Client Finder<span class="text-blue-500">.ai</span>
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+
+<div class="mb-8">
+
+<h1 class="text-3xl font-bold text-white mb-1">Lead Dashboard</h1>
+
+<p class="text-sm text-slate-400">
+
+Discover and manage high-ticket AI clients.
+
+</p>
+
+</div>
+
+<div class="glass-panel rounded-2xl overflow-hidden shadow-2xl">
+
+<div class="overflow-x-auto">
+
+<table class="w-full text-left border-collapse">
+
+<thead>
+
+<tr class="bg-slate-800/50 border-b border-slate-700/80">
+
+<th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase">Company</th>
+
+<th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase">Requirement</th>
+
+<th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase">Budget</th>
+
+<th class="py-4 px-6 text-xs font-semibold text-slate-400 uppercase text-right">Contact</th>
+
+</tr>
+
+</thead>
+
+<tbody id="leadTable" class="divide-y divide-slate-800/60">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</main>
+
+<footer class="w-full text-center py-6 mt-auto border-t border-slate-800/50 bg-slate-900/20">
+
+<p class="text-sm text-slate-400">
+
+Designed & Developed by
+
+<span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
+
+Khokan Pal
+
+</span>
+
+</p>
+
+</footer>
+
+<script>
+
+fetch('leads.json')
+.then(res=>res.json())
+.then(data=>{
+
+let table=document.getElementById("leadTable")
+
+data.forEach(lead=>{
+
+let row=document.createElement("tr")
+
+row.className="hover:bg-slate-800/30 transition-colors"
+
+row.innerHTML=`
+
+<td class="py-4 px-6 font-semibold text-slate-200">${lead.company}</td>
+
+<td class="py-4 px-6 text-purple-400">${lead.need}</td>
+
+<td class="py-4 px-6 text-emerald-400 font-bold">${lead.budget}</td>
+
+<td class="py-4 px-6 text-right">
+
+<a href="mailto:${lead.contact}" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm rounded-lg">
+
+Email Client
+
+</a>
+
+</td>
+
+`
+
+table.appendChild(row)
+
+})
+
+})
+
+</script>
 
 </body>
 </html>
-
